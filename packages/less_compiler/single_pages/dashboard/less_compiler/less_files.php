@@ -4,10 +4,10 @@
 <div class="ccm-pane-body">
 	<table>
 		<thead>
-			<tr><th>From <em><?=$frpath?></em></th><th>To <em><?=$topath?></em></th></tr>
+			<tr><th><?=.t('From')?>  <em><?=$frpath?></em></th><th><?=.t('To')?> <em><?=$topath?></em></th></tr>
 		</thead>
 		<tbody>
-			<?=(!isset($files[0])?'<tr><td colspan=2>No LESS Files</td></tr>':'')?>
+			<?=(!isset($files[0])?'<tr><td colspan=2>'.t('No LESS Files').'</td></tr>':'')?>
 			<?php foreach($files as $file) echo "<tr><td>$file</td><td>".substr($file,0,strlen($file)-5).".css</td></tr>" ?>
 		</tbody>
 	</table>

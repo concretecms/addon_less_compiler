@@ -1,11 +1,11 @@
 <?php defined('C5_EXECUTE') or die(_("Access Denied."));
 
-class DashboardLessCompilerLessFilesController extends Controller {
+class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 	public $helpers = array('text','form','concrete/interface', 'validation/form');
 	
 	public function view() {
 		Loader::model('less_compiler','less_compiler');
-		Loader::model('/models/page_theme');
+		Loader::model('page_theme');
 		$theme = PageTheme::getSiteTheme();
 		$frpath = LESSDIR;
 		$topath = CSSDIR;
