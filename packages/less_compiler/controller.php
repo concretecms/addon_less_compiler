@@ -24,7 +24,7 @@ class LessCompilerPackage extends Package {
 	}
 	
 	public function install() {
-		$pkg = parent::install();\
+		$pkg = parent::install();
 		
 		Loader::model('single_page');
 		Loader::model('job');
