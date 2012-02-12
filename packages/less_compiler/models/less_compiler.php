@@ -1,25 +1,24 @@
 <?php
 class LessCompiler {
 	
-	function __construct() {
-		set_time_limit(3);
-	}
-	
-	public function getFilesArray($dir='./themes') {
-		$d = opendir($dir);
-		$out = array();
-		while($f = readdir($d)) {
-			if ($f == '..' || $f == '.')continue;
-			if (is_dir($dir."/".$f)) {
-				$fs = $this->getFilesArray($dir."/".$f);
-				if ($fs) $out[$dir."/".$f] = $this->getFilesArray($dir."/".$f);
+	public function getFilesArray($dir=LESSDIR) {
+		if (file_exists($dir)){
+			$d = opendir($dir);
+			$out = array();
+			while($f = readdir($d)) {
+				if ($f == '..' || $f == '.')continue;
+				if (is_dir($dir."/".$f)) {
+					$fs = $this->getFilesArray($dir."/".$f);
+					if ($fs) $out[$dir."/".$f] = $this->getFilesArray($dir."/".$f);
+				}
+				else if (substr($f,-5) == '.less') array_push($out,$dir."/".$f);
 			}
-			else if (substr($f,-5) == '.less') array_push($out,$dir."/".$f);
+			return $out;
 		}
-		return $out;
+		return array();
 	}
 	
-	public function getFlatFilesArray($dir='./themes',$rem=null) {
+	public function getFlatFilesArray($dir=LESSDIR,$rem=null) {
 		$files = $this->getFilesArray($dir);
 		return $this->flatten($files,$dir);
 	}
@@ -34,6 +33,5 @@ class LessCompiler {
 		}
 		return $o;
 	}
-	
 	
 }

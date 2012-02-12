@@ -1,4 +1,5 @@
 <?php defined('C5_EXECUTE') or die(_("Access Denied."));
+
 class LessCompile extends Job {
 
 	public function getJobName() {
@@ -11,18 +12,14 @@ class LessCompile extends Job {
 
 	public function run() {
 		Loader::model('less_compiler','less_compiler');
-		Loader::model('/models/page_theme');
-		$theme = PageTheme::getSiteTheme();
-		$path = $theme->getThemeDirectory();
-		$frpath = $path.'/less';
-		$topath = $path.'/';
+		
 		$lc = new LessCompiler();
 		$files = $lc->getFlatFilesArray($frpath,$frpath);
 		
-		return $this->compile($files, $topath, $frpath);
+		return $this->compile($files);
 	}
 	
-	private function compile(array $files, $topath, $frpath) {
+	private function compile(array $files, $topath=CSSDIR, $frpath=LESSDIR) {
 		Loader::library('less','less_compiler');
 		foreach($files as $file) {
 			$path = preg_split('~/~',$file);

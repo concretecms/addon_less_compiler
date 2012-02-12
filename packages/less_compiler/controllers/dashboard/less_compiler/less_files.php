@@ -7,17 +7,13 @@ class DashboardLessCompilerLessFilesController extends Controller {
 		Loader::model('less_compiler','less_compiler');
 		Loader::model('/models/page_theme');
 		$theme = PageTheme::getSiteTheme();
-		$path = $theme->getThemeDirectory();
-		$frpath = $path.'/less';
-		$topath = $path.'/';
+		$frpath = LESSDIR;
+		$topath = CSSDIR;
 		$lc = new LessCompiler();
 		
-		if (is_dir($path)) {
-			$this->set('path', $path);
-			$this->set('frpath', $frpath);
-			$this->set('topath', $topath);
-			$this->set('files', $lc->getFlatFilesArray($frpath));
-		}
+		$this->set('frpath', str_replace(DIR_BASE,'',$frpath));
+		$this->set('topath', str_replace(DIR_BASE,'',$topath));
+		$this->set('files', $lc->getFlatFilesArray($frpath));
 	}
 	
 }

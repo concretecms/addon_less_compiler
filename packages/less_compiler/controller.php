@@ -14,8 +14,17 @@ class LessCompilerPackage extends Package {
 		return t('Less Compiler');
 	}
 	
+	public function on_start() {
+		define(LESSDIR, DIR_FILES_UPLOADED.'/LESS/');
+		define(CSSDIR, DIR_FILES_UPLOADED.'/CSS/');
+		
+		if (!is_dir(LESSDIR)) mkdir(LESSDIR);
+		if (!is_dir(CSSDIR))  mkdir(CSSDIR);
+		
+	}
+	
 	public function install() {
-		$pkg = parent::install();
+		$pkg = parent::install();\
 		
 		Loader::model('single_page');
 		Loader::model('job');
