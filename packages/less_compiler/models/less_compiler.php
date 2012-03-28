@@ -1,7 +1,8 @@
 <?php
 class LessCompiler {
-	
-	public function getFilesArray($dir=LESSDIR) {
+
+	public function getFilesArray($dir=null) {
+		if($dir === null) $dir = LESSDIR;
 		if (file_exists($dir)){
 			$d = opendir($dir);
 			$out = array();
@@ -17,21 +18,22 @@ class LessCompiler {
 		}
 		return array();
 	}
-	
-	public function getFlatFilesArray($dir=LESSDIR,$rem=null) {
+
+	public function getFlatFilesArray($dir=null,$rem=null) {
+		if($dir === null) $dir = LESSDIR;
 		$files = $this->getFilesArray($dir);
 		return $this->flatten($files,$dir);
 	}
-	
+
 	private function flatten(array $arr, $rem=null) {
 		$o = array();
 		foreach($arr as $a) {
-			if (is_array($a)) 
+			if (is_array($a))
 				$o = array_merge($this->flatten($a,$rem),$o);
-			else 
+			else
 				array_push($o,($rem?str_replace($rem,'',$a):$a));
 		}
 		return $o;
 	}
-	
+
 }

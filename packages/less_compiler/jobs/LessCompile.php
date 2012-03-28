@@ -12,14 +12,16 @@ class LessCompile extends Job {
 
 	public function run() {
 		Loader::model('less_compiler','less_compiler');
-		
+
 		$lc = new LessCompiler();
 		$files = $lc->getFlatFilesArray($frpath,$frpath);
-		
+
 		return $this->compile($files);
 	}
-	
+
 	private function compile(array $files, $topath=CSSDIR, $frpath=LESSDIR) {
+		if ($topath === null) $topath = CSSDIR;
+		if ($frpath === null) $topath = LESSDIR;
 		Loader::library('less','less_compiler');
 		foreach($files as $file) {
 			$path = preg_split('~/~',$file);
