@@ -7,7 +7,7 @@ class lessHelper {
 
 	public function renderCache() {
 		$output = '';
-		foreach(array_filter($this->queue) as $file) {
+		foreach(array_unique(array_filter($this->queue)) as $file) {
 			$output .= '<link rel="stylesheet" type="text/css" href="';
 			$output .= $file;
 			$output .= '">'."\n";
@@ -20,6 +20,10 @@ class lessHelper {
 		foreach ($files as $file) {
 			$this->queue[] = $this->getUrl($file);
 		}
+	}
+
+	public function resetQueue() {
+		$this->queue = array();
 	}
 
 	public function link() {
