@@ -2,6 +2,9 @@
 class LessCompiler {
 
 	public function getFilesArray($dir=null) {
+		$less = Loader::helper('less','less_compiler');
+		$less->defineLess();
+
 		if($dir === null) $dir = LESS_LESSDIR;
 		if (file_exists($dir)){
 			$d = opendir($dir);
@@ -20,6 +23,9 @@ class LessCompiler {
 	}
 
 	public function getFlatFilesArray($dir=null,$rem=null) {
+		$less = Loader::helper('less','less_compiler');
+		$less->defineLess();
+
 		if($dir === null) $dir = LESS_LESSDIR;
 		$files = $this->getFilesArray($dir);
 		return $this->flatten($files,$dir);

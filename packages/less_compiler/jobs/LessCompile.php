@@ -12,7 +12,9 @@ class LessCompile extends Job {
 
 	public function run() {
 		Loader::model('less_compiler','less_compiler');
-
+		$less = Loader::helper('less','less_compiler');
+		$less->defineLess();
+		
 		$lc = new LessCompiler();
 		$files = $lc->getFlatFilesArray($frpath,$frpath);
 
@@ -20,6 +22,10 @@ class LessCompile extends Job {
 	}
 
 	private function compile(array $files, $topath=LESS_CSSDIR, $frpath=LESS_LESSDIR) {
+		if (!defined('LESS_LESSDIR')) {
+			$less = Loader::helper('less','less_compiler');
+			$less->defineLess();
+		}
 		if ($topath === null) $topath = LESS_CSSDIR;
 		if ($frpath === null) $topath = LESS_LESSDIR;
 		Loader::library('3rdparty/less','less_compiler');

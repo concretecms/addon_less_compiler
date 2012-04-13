@@ -6,6 +6,12 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 	public function view() {
 		Loader::model('less_compiler','less_compiler');
 		Loader::model('page_theme');
+
+		if (!defined('LESS_LESSDIR')) {
+			$less = Loader::helper('less','less_compiler');
+			$less->defineLess();
+		}
+
 		$theme = PageTheme::getSiteTheme();
 		$frpath = LESS_LESSDIR;
 		if (!file_exists(LESS_LESSDIR)) {
