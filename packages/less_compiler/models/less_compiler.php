@@ -1,8 +1,8 @@
-<?php
+<?php defined('C5_EXECUTE') or die(_("Access Denied."));
 class LessCompiler {
 
 	public function getFilesArray($dir=null) {
-		if($dir === null) $dir = LESSDIR;
+		if($dir === null) $dir = LESS_LESSDIR;
 		if (file_exists($dir)){
 			$d = opendir($dir);
 			$out = array();
@@ -20,7 +20,7 @@ class LessCompiler {
 	}
 
 	public function getFlatFilesArray($dir=null,$rem=null) {
-		if($dir === null) $dir = LESSDIR;
+		if($dir === null) $dir = LESS_LESSDIR;
 		$files = $this->getFilesArray($dir);
 		return $this->flatten($files,$dir);
 	}

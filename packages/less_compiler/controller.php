@@ -15,13 +15,13 @@ class LessCompilerPackage extends Package {
 	}
 
 	public function on_start() {
-		if (!defined('LESSDIR')) {
+		if (!defined('LESS_LESSDIR')) {
 			Loader::model('page_theme');
 			$theme = PageTheme::getSiteTheme();
 			$path = $theme->getThemeDirectory();
-			define(LESSDIR,realpath($path).'/less');
+			define(LESS_LESSDIR,realpath($path).'/less');
 		}
-		if (!defined(CSSDIR))  define(CSSDIR,  DIR_FILES_UPLOADED.'/CSS/');
+		if (!defined(LESS_CSSDIR))  define(LESS_CSSDIR,  DIR_FILES_UPLOADED.'/css/');
 	}
 
 	public function install() {
@@ -29,8 +29,8 @@ class LessCompilerPackage extends Package {
 		$pkg = parent::install();
 
 		self::on_start();
-		if (!is_dir(LESSDIR)) mkdir(LESSDIR);
-		if (!is_dir(CSSDIR))  mkdir(CSSDIR);
+
+		if (!is_dir(LESS_CSSDIR))  mkdir(LESS_CSSDIR);
 
 		Loader::model('single_page');
 		Loader::model('job');
@@ -46,5 +46,3 @@ class LessCompilerPackage extends Package {
 	}
 
 }
-
-?>
