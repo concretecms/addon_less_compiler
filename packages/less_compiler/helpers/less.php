@@ -1,4 +1,4 @@
-<?php
+<?php defined('C5_EXECUTE') or die(_("Access Denied."));
 class lessHelper {
 	public $queue = array();
 
@@ -40,7 +40,7 @@ class lessHelper {
 
 	public function getUrl($file) {
 		$file = trim($file);
-		$dir = realpath(CSSDIR);
+		$dir = realpath(LESS_CSSDIR);
 		if (substr($dir,0,strlen(realpath(DIR_BASE))) != realpath(DIR_BASE)) {
 			return;
 		}

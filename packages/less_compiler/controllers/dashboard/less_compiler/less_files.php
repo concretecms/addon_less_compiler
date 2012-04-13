@@ -7,15 +7,15 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 		Loader::model('less_compiler','less_compiler');
 		Loader::model('page_theme');
 		$theme = PageTheme::getSiteTheme();
-		$frpath = LESSDIR;
-		if (!file_exists(LESSDIR)) {
-			$this->set('warning','You need to create your LESS directory at <pre style="color:#111;text-transform:none">'.LESSDIR.'</pre>');
+		$frpath = LESS_LESSDIR;
+		if (!file_exists(LESS_LESSDIR)) {
+			$this->set('warning','You need to create your LESS directory at <pre style="color:#111;text-transform:none">'.LESS_LESSDIR.'</pre>');
 			return;
-		} else if (!is_dir(LESSDIR)) {
-			$this->set('warning','Your configured LESSDIR is not a directory!');
+		} else if (!is_dir(LESS_LESSDIR)) {
+			$this->set('warning','Your configured LESS_LESSDIR is not a directory!');
 			return;
 		}
-		$topath = CSSDIR;
+		$topath = LESS_CSSDIR;
 		$lc = new LessCompiler();
 
 		$this->set('frpath', str_replace(DIR_BASE,'',$frpath));

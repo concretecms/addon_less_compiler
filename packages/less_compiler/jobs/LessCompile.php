@@ -19,10 +19,10 @@ class LessCompile extends Job {
 		return $this->compile($files);
 	}
 
-	private function compile(array $files, $topath=CSSDIR, $frpath=LESSDIR) {
-		if ($topath === null) $topath = CSSDIR;
-		if ($frpath === null) $topath = LESSDIR;
-		Loader::library('less','less_compiler');
+	private function compile(array $files, $topath=LESS_CSSDIR, $frpath=LESS_LESSDIR) {
+		if ($topath === null) $topath = LESS_CSSDIR;
+		if ($frpath === null) $topath = LESS_LESSDIR;
+		Loader::library('3rdparty/less','less_compiler');
 		foreach($files as $file) {
 			$path = preg_split('~/~',$file);
 			$filename = array_pop($path);

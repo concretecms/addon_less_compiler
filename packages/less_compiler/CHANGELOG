@@ -1,0 +1,2 @@
+0.9
+	- Changed LESS_CSSDIR to 'css' from 'CSS'
