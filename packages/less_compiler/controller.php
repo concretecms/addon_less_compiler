@@ -4,7 +4,7 @@ class LessCompilerPackage extends Package {
 
 	protected $pkgHandle = 'less_compiler';
 	protected $appVersionRequired = '5.5';
-	protected $pkgVersion = '0.9';
+	protected $pkgVersion = '0.9.1';
 
 	public function getPackageDescription() {
 		return t('Compile your Less with a job.');
@@ -36,7 +36,7 @@ class LessCompilerPackage extends Package {
 		$dm->update(array('cName'=>t("Manage LESS Files"), 'cDescription'=>t("Manage Your LESS Association")));
 
 		// install geocode job
-		$jb = Job::installByPackage('LessCompile', $pkg);
+		$jb = Job::installByPackage('less_compile', $pkg);
 	}
 
 }

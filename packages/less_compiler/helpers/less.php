@@ -14,7 +14,16 @@ class lessHelper {
 		}
 		return $output;
 	}
-
+	
+	public function defineLess() {
+		if (!defined('LESS_LESSDIR')) {
+			Loader::model('page_theme');
+			$theme = PageTheme::getSiteTheme();
+			$path = $theme->getThemeDirectory();
+			define(LESS_LESSDIR,realpath($path).'/less');
+		}
+	}
+	
 	public function add() {
 		$files = func_get_args();
 		foreach ($files as $file) {

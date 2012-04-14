@@ -32,7 +32,7 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 
 	public function compile() {
 		Loader::model('job');
-		$jobObj = Job::getJobObjByHandle('LessCompile');
+		$jobObj = Job::getJobObjByHandle('less_compile');
 		$this->view();
 		$this->set("message",$jobObj->executeJob());
 	}
