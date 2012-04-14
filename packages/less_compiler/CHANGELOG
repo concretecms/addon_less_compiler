@@ -1,0 +1,5 @@
+0.9.1
+	- Changed job filename to be lowercase =]
+
+0.9
+	- Changed LESS_CSSDIR to 'css' from 'CSS'
