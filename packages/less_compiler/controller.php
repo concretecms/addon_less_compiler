@@ -4,7 +4,7 @@ class LessCompilerPackage extends Package {
 
 	protected $pkgHandle = 'less_compiler';
 	protected $appVersionRequired = '5.5';
-	protected $pkgVersion = '0.9.1';
+	protected $pkgVersion = '0.9.2';
 
 	public function getPackageDescription() {
 		return t('Compile your Less with a job.');
@@ -15,7 +15,6 @@ class LessCompilerPackage extends Package {
 	}
 
 	public function on_start() {
-		if (!defined(LESS_CSSDIR)) define(LESS_CSSDIR,  DIR_FILES_UPLOADED.'/css/');
 	}
 
 	public function install() {
@@ -23,8 +22,15 @@ class LessCompilerPackage extends Package {
 		$pkg = parent::install();
 
 		self::on_start();
-
-		if (!is_dir(LESS_CSSDIR))  mkdir(LESS_CSSDIR);
+		
+		$less = loader::helper('less','less_compiler');
+		$less->defineLess();
+		
+		$csspath = '/';
+		foreach(explode('/',LESS_CSSDIR) as $node) {
+			$csspath .= "/".$node;
+			if (!is_dir($csspath)) mkdir($csspath);
+		}
 
 		Loader::model('single_page');
 		Loader::model('job');
@@ -35,7 +41,6 @@ class LessCompilerPackage extends Package {
 		$dm = SinglePage::add('/dashboard/less_compiler/less_files', $pkg);
 		$dm->update(array('cName'=>t("Manage LESS Files"), 'cDescription'=>t("Manage Your LESS Association")));
 
-		// install geocode job
 		$jb = Job::installByPackage('less_compile', $pkg);
 	}
 

@@ -13,13 +13,16 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 		}
 
 		$theme = PageTheme::getSiteTheme();
-		$frpath = LESS_LESSDIR;
-		if (!file_exists(LESS_LESSDIR)) {
+		if (!file_exists(LESS_LESSDIR) && !file_exists(LESS_LESSDIR_OVERRIDE)) {
 			$this->set('warning','You need to create your LESS directory at <pre style="color:#111;text-transform:none">'.LESS_LESSDIR.'</pre>');
 			return;
-		} else if (!is_dir(LESS_LESSDIR)) {
+		} else if (!is_dir(LESS_LESSDIR) && !is_dir(LESS_LESSDIR_OVERRIDE)) {
 			$this->set('warning','Your configured LESS_LESSDIR is not a directory!');
 			return;
+		}
+		$frpath = LESS_LESSDIR;
+		if (file_exists(LESS_LESSDIR_OVERRIDE) && is_dir(LESS_LESSDIR_OVERRIDE)) {
+			$frpath = LESS_LESSDIR_OVERRIDE;
 		}
 		$topath = LESS_CSSDIR;
 		$lc = new LessCompiler();
@@ -34,7 +37,14 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 		Loader::model('job');
 		$jobObj = Job::getJobObjByHandle('less_compile');
 		$this->view();
-		$this->set("message",$jobObj->executeJob());
+		$output = $jobObj->executeJob();
+		if ($output == 'Successfully compiled!') {
+			$this->set("message",$output);
+		} else {
+			$error = Loader::helper('validation/error');
+			$error->add($output);
+			$this->set("error",$error);
+		}
 	}
 
 }

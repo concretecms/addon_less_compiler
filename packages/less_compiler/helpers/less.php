@@ -16,11 +16,20 @@ class lessHelper {
 	}
 	
 	public function defineLess() {
+		Loader::model('page_theme');
+		$theme = PageTheme::getSiteTheme();
 		if (!defined('LESS_LESSDIR')) {
-			Loader::model('page_theme');
-			$theme = PageTheme::getSiteTheme();
 			$path = $theme->getThemeDirectory();
 			define(LESS_LESSDIR,realpath($path).'/less');
+		}
+		if (!defined('LESS_CSSDIR')) {
+			$handle = $theme->getThemeHandle();
+			define('LESS_CSSDIR',  DIR_FILES_UPLOADED.'/css/'.$handle);
+		}
+		if (!defined('LESS_LESSDIR_OVERRIDE')) {
+			$path = 
+			$handle = $theme->getThemeHandle();
+			define('LESS_LESSDIR_OVERRIDE',DIR_BASE.'/themes/'.$handle."/less");
 		}
 	}
 	
@@ -49,6 +58,7 @@ class lessHelper {
 
 	public function getUrl($file) {
 		$file = trim($file);
+		$this->defineLess();
 		$dir = realpath(LESS_CSSDIR);
 		if (substr($dir,0,strlen(realpath(DIR_BASE))) != realpath(DIR_BASE)) {
 			return;

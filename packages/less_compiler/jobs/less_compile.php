@@ -27,7 +27,11 @@ class LessCompile extends Job {
 			$less->defineLess();
 		}
 		if ($topath === null) $topath = LESS_CSSDIR;
-		if ($frpath === null) $topath = LESS_LESSDIR;
+		if ($frpath === null) $frpath = LESS_LESSDIR;
+		
+		if ($frpath === LESS_LESSDIR && is_dir(LESS_LESSDIR_OVERRIDE)) {
+			$frpath = LESS_LESSDIR_OVERRIDE;
+		}
 		Loader::library('3rdparty/less','less_compiler');
 		foreach($files as $file) {
 			$path = preg_split('~/~',$file);
