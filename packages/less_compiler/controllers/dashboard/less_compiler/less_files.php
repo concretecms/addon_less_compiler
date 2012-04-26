@@ -14,10 +14,10 @@ class DashboardLessCompilerLessFilesController extends DashboardBaseController {
 
 		$theme = PageTheme::getSiteTheme();
 		if (!file_exists(LESS_LESSDIR) && !file_exists(LESS_LESSDIR_OVERRIDE)) {
-			$this->set('warning','You need to create your LESS directory at <pre style="color:#111;text-transform:none">'.LESS_LESSDIR.'</pre>');
+			$this->set('warning',t('You need to create your LESS directory at').' <pre style="color:#111;text-transform:none">'.LESS_LESSDIR.'</pre>');
 			return;
 		} else if (!is_dir(LESS_LESSDIR) && !is_dir(LESS_LESSDIR_OVERRIDE)) {
-			$this->set('warning','Your configured LESS_LESSDIR is not a directory!');
+			$this->set('warning',t('Your configured LESS_LESSDIR is not a directory!'));
 			return;
 		}
 		$frpath = LESS_LESSDIR;
