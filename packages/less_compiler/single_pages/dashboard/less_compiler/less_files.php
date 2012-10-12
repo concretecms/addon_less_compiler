@@ -4,7 +4,7 @@ $ui = Loader::helper('concrete/interface');
 <?=Loader::helper('concrete/dashboard')->getDashboardPaneHeaderWrapper(t('Currently Watched Less Files'), false, false, false, array(), $settings)?>
 <div class="ccm-pane-body">
 	<? if (!isset($warning)) { ?>
-	<table>
+	<table class='ccm-results-list'>
 		<thead>
 			<tr><th><?=t('From')?>  <em><?=$frpath?></em></th><th><?=t('To')?> <em><?=$topath?></em></th></tr>
 		</thead>
