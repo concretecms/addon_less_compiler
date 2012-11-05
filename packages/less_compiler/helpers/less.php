@@ -46,9 +46,9 @@ class lessHelper {
 		}
 		$dir = substr($dir,strlen(realpath(DIR_BASE)));
 		if (substr($file,-5) == '.less') {
-			return BASE_URL.$dir.'/'.substr($file, 0, strlen($file) - 5).'.css';
+			return BASE_URL.DIR_REL.$dir.'/'.substr($file, 0, strlen($file) - 5).'.css';
 		} else {
-			return BASE_URL.$dir.'/'.$file;
+			return BASE_URL.DIR_REL.$dir.'/'.$file;
 		}
 	}
 }
