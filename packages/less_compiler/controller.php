@@ -21,7 +21,7 @@ class LessCompilerPackage extends Package {
 			$path = $theme->getThemeDirectory();
 			define(LESSDIR,realpath($path).'/less');
 		}
-		if (!defined(CSSDIR))  define(CSSDIR,  DIR_FILES_UPLOADED.'/CSS/');
+		if (!defined(CSSDIR))  define(CSSDIR,  DIR_FILES_UPLOADED.'/css/');
 	}
 
 	public function install() {
