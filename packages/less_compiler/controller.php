@@ -4,7 +4,7 @@ class LessCompilerPackage extends Package {
 
 	protected $pkgHandle = 'less_compiler';
 	protected $appVersionRequired = '5.5';
-	protected $pkgVersion = '1.1';
+	protected $pkgVersion = '1.2';
 
 	public function getPackageDescription() {
 		return t('Compile your Less with a job.');
